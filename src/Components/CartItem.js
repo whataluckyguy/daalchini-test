@@ -23,7 +23,6 @@ const CartItem = ({ item, addInCart, handleChange }) => {
             color="success"
             onClick={() => {
               addInCart(item);
-              handleChange(item, 1);
             }}
           >
             ADD

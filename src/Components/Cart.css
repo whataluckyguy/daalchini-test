@@ -1,0 +1,7 @@
+.cart {
+  position: sticky;
+  bottom: 0;
+}
+.hide {
+  display: none;
+}

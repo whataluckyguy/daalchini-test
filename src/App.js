@@ -20,7 +20,7 @@ const App = () => {
     const arr = cartItem;
     arr[ind].amount += d;
 
-    if (arr[ind].amount <= 0) arr[ind].amount = 0;
+    if (arr[ind].amount === 0) arr[ind].amount = 1;
     setCartItem([...arr]);
   };
 
@@ -34,10 +34,12 @@ const App = () => {
     handlePrice();
   });
 
+  const forCart = () => {};
+
   return (
     <div className="App">
       <BuyPage addInCart={addInCart} handleChange={handleChange} />
-      <BottomNav NOI={cartItem.length} total={total} />
+      <BottomNav NOI={cartItem.length} total={total} cartItem={cartItem} />
     </div>
   );
 };

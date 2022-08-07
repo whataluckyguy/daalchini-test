@@ -1,9 +1,11 @@
+.wrapper {
+  position: sticky;
+  bottom: 0;
+}
 .bot {
   padding: 1vh 10vw 1vh 10vw;
   background-color: rgb(95, 230, 106);
   height: 10vh;
-  position: sticky;
-  bottom: 0;
   display: flex;
   justify-content: space-around;
   color: white;
