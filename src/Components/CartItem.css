@@ -19,3 +19,12 @@
   display: flex;
   justify-content: space-between;
 }
+.counter {
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+.counter > button {
+  width: 25px;
+  margin: 0 10px 0 10px;
+}

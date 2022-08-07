@@ -2,14 +2,15 @@ import React from "react";
 import { Button } from "reactstrap";
 import "./CartItem.css";
 
-const CartItem = ({ product, addInCart }) => {
+const CartItem = ({ item, addInCart, handleChange }) => {
+  const { title, author, price, img } = item;
   return (
     <div className="Item">
       <div className="productImage">
-        <img src={product.smallImage} alt="product iamge" />
+        <img src={img} alt="product iamge" />
       </div>
       <div className="productDetails">
-        <h4>{product.productName}</h4>
+        <h4>{title}</h4>
         <div>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           Exercitationem impedit quos nemo ducimus rem minima, tempore, neque
@@ -17,10 +18,26 @@ const CartItem = ({ product, addInCart }) => {
           accusantium! Est, magnam.
         </div>
         <div className="priceAndNumber">
-          <strong>${product.productPrice}</strong>
-          <Button color="success" onClick={() => addInCart(product)}>
+          <strong>${price}</strong>
+          <Button
+            color="success"
+            onClick={() => {
+              addInCart(item);
+              handleChange(item, 1);
+            }}
+          >
             ADD
           </Button>
+        </div>
+
+        <div className="counter">
+          <button color="success" onClick={() => handleChange(item, -1)}>
+            -
+          </button>
+          {item.amount}
+          <button color="success" onClick={() => handleChange(item, 1)}>
+            +
+          </button>
         </div>
       </div>
     </div>

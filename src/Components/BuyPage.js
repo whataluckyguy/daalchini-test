@@ -1,14 +1,19 @@
 import React from "react";
-import { Container, Col, Row, ListGroup, ListGroupItem } from "reactstrap";
+import { Container, ListGroup, ListGroupItem } from "reactstrap";
 import CartItem from "./CartItem";
+import list from "../data";
 
-const BuyPage = ({ addInCart, product }) => {
+const BuyPage = ({ addInCart, handleChange }) => {
   return (
     <Container fluid>
       <ListGroup>
-        {product.map((product) => (
-          <ListGroupItem key={product.id} className="mt-2 mb-1">
-            <CartItem product={product} addInCart={addInCart} />
+        {list.map((item) => (
+          <ListGroupItem key={item.id} className="mt-2 mb-1">
+            <CartItem
+              item={item}
+              addInCart={addInCart}
+              handleChange={handleChange}
+            />
           </ListGroupItem>
         ))}
       </ListGroup>
