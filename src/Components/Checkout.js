@@ -35,11 +35,14 @@ const Checkout = ({ setUser, cartItem, total }) => {
                 <Col>Price</Col>
               </Row>
               {cartItem.map((item) => (
-                <Row>
-                  <Col className="text-center">{item.title}</Col>
-                  <Col className="text-center">{item.amount}</Col>
-                  <Col className="text-center">${item.price}</Col>
-                </Row>
+                <>
+                  <Row>
+                    <Col className="text-center">{item.title}</Col>
+                    <Col className="text-center">{item.amount}</Col>
+                    <Col className="text-center">${item.price}</Col>
+                  </Row>
+                  <hr />
+                </>
               ))}
               <Row>
                 <Col className="text-center">
