@@ -6,6 +6,7 @@ import "./App.css";
 import BuyPage from "./Components/BuyPage";
 import BottomNav from "./Components/BottomNav";
 import { UserContext } from "./Context/UserContext";
+import Checkout from "./Components/Checkout";
 
 const App = () => {
   const [cartItem, setCartItem] = useState([]);
@@ -40,16 +41,24 @@ const App = () => {
 
   return (
     <div className="App">
-      <BuyPage addInCart={addInCart} handleChange={handleChange} />
-      <UserContext.Provider value={{ user, setUser }}>
-        <BottomNav
-          NOI={cartItem.length}
-          total={total}
-          cartItem={cartItem}
-          user={user}
-          setUser={setUser}
-        />
-      </UserContext.Provider>
+      {user ? (
+        <>
+          <Checkout setUser={setUser} cartItem={cartItem} total={total} />
+        </>
+      ) : (
+        <>
+          <BuyPage addInCart={addInCart} handleChange={handleChange} />
+          <UserContext.Provider value={{ user, setUser }}>
+            <BottomNav
+              NOI={cartItem.length}
+              total={total}
+              cartItem={cartItem}
+              user={user}
+              setUser={setUser}
+            />
+          </UserContext.Provider>
+        </>
+      )}
     </div>
   );
 };
