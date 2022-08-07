@@ -5,3 +5,16 @@
 .hide {
   display: none;
 }
+.showLogin {
+  border: 1px solid gray;
+  background-color: white;
+}
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  padding: 10px;
+}

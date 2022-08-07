@@ -5,10 +5,12 @@ import "./App.css";
 
 import BuyPage from "./Components/BuyPage";
 import BottomNav from "./Components/BottomNav";
+import { UserContext } from "./Context/UserContext";
 
 const App = () => {
   const [cartItem, setCartItem] = useState([]);
   const [total, setTotal] = useState(0);
+  const [user, setUser] = useState(false);
 
   const addInCart = (item) => {
     if (cartItem.indexOf(item) !== -1) return;
@@ -39,7 +41,15 @@ const App = () => {
   return (
     <div className="App">
       <BuyPage addInCart={addInCart} handleChange={handleChange} />
-      <BottomNav NOI={cartItem.length} total={total} cartItem={cartItem} />
+      <UserContext.Provider value={{ user, setUser }}>
+        <BottomNav
+          NOI={cartItem.length}
+          total={total}
+          cartItem={cartItem}
+          user={user}
+          setUser={setUser}
+        />
+      </UserContext.Provider>
     </div>
   );
 };
