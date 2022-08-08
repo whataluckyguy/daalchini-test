@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "reactstrap";
 import "./CartItem.css";
 
-const CartItem = ({ item, addInCart, handleChange }) => {
+const CartItem = ({ item, addInCart, handleChange, amount }) => {
   const { title, author, price, img } = item;
   return (
     <div className="Item">
@@ -11,12 +11,7 @@ const CartItem = ({ item, addInCart, handleChange }) => {
       </div>
       <div className="productDetails">
         <h4>{title}</h4>
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Exercitationem impedit quos nemo ducimus rem minima, tempore, neque
-          tenetur aperiam aliquam vero odio porro repellendus qui, dolorum ipsa
-          accusantium! Est, magnam.
-        </div>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
         <div className="priceAndNumber">
           <strong>${price}</strong>
           <Button
@@ -24,19 +19,16 @@ const CartItem = ({ item, addInCart, handleChange }) => {
             onClick={() => {
               addInCart(item);
             }}
+            className="ButtonSize"
           >
             ADD
           </Button>
         </div>
 
         <div className="counter">
-          <button color="success" onClick={() => handleChange(item, -1)}>
-            -
-          </button>
-          {item.amount}
-          <button color="success" onClick={() => handleChange(item, 1)}>
-            +
-          </button>
+          <Button onClick={() => handleChange(item, -1)}>-</Button>
+          <span className="qty">{item.amount}</span>
+          <Button onClick={() => handleChange(item, 1)}>+</Button>
         </div>
       </div>
     </div>

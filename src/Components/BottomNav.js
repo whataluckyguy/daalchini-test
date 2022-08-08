@@ -4,15 +4,26 @@ import "./BottomNav.css";
 import Cart from "./Cart";
 import { UserContext } from "../Context/UserContext";
 import Continue from "./Continue";
+import { useNavigate } from "react-router-dom";
 
-const BottomNav = ({ NOI, total, cartItem, user, setUser }) => {
+const BottomNav = ({ total, cartItem, user, setUser }) => {
   const [cartClass, setCartClass] = useState("hide");
   const [continueClass, setContinueClass] = useState("hide");
   const context = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const checkout = () => {
+    setCartClass("hide");
+    navigate("/checkout", { replace: true });
+  };
   return (
     <div className="wrapper">
       <Cart cartItem={cartItem} total={total} cartClassName={cartClass} />
-      <Continue continueClass={continueClass} user={user} setUser={setUser} />
+      <Continue
+        continueClass={continueClass}
+        cartItem={cartItem}
+        total={total}
+      />
 
       <div className="bot">
         {context.user ? (
@@ -24,15 +35,10 @@ const BottomNav = ({ NOI, total, cartItem, user, setUser }) => {
                 setCartClass("cart");
               }}
             >
-              {NOI} Item(s) <br /> Total ${total}
+              {cartItem.length} Item(s) Total ${total}
             </Button>
-            <Button
-              color="success"
-              onClick={() => {
-                setCartClass("hide");
-              }}
-            >
-              Continue
+            <Button color="success" onClick={checkout}>
+              CheckOut
             </Button>
           </>
         ) : (
@@ -44,7 +50,7 @@ const BottomNav = ({ NOI, total, cartItem, user, setUser }) => {
                 setCartClass("cart");
               }}
             >
-              {NOI} Item(s) <br /> Total ${total}
+              {cartItem.length} Item(s) Total ${total}
             </Button>
             <Button
               color="success"
@@ -53,7 +59,7 @@ const BottomNav = ({ NOI, total, cartItem, user, setUser }) => {
                 setContinueClass("showLogin");
               }}
             >
-              Continue
+              Login
             </Button>
           </>
         )}

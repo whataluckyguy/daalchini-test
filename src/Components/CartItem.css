@@ -23,8 +23,13 @@
   padding-top: 10px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
-.counter > button {
-  width: 25px;
-  margin: 0 10px 0 10px;
+.qty {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.ButtonSize {
+  padding-left: 30px;
+  padding-right: 30px;
 }

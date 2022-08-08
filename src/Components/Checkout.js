@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Checkout.css";
 import {
   Container,
@@ -8,18 +8,19 @@ import {
   Col,
   Button,
 } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 const Checkout = ({ setUser, cartItem, total }) => {
+  const context = useContext(UserContext);
+  const navigate = useNavigate();
+  const backToHome = () => {
+    navigate("/", { replace: true });
+  };
   return (
     <>
       <div className="head">
-        <button
-          onClick={() => {
-            setUser(false);
-          }}
-        >
-          Back to Product Listing
-        </button>
+        <Button onClick={backToHome}>Back to Product Listing</Button>
         <h3>Checkout</h3>
       </div>
       <div className="main">
