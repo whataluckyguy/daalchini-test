@@ -46,10 +46,8 @@ const Continue = ({ continueClass, setContinueClassName }) => {
     }
   };
 
-  const verifyOtp = (e) => {
+  const verifyOtp = () => {
     // e.preventDefault();
-    let otp = e.target.value;
-    setOtp(otp);
 
     if (otp.length === 6) {
       console.log(otp);
@@ -102,9 +100,13 @@ const Continue = ({ continueClass, setContinueClassName }) => {
                     <input
                       placeholder="Enter OTP"
                       value={otp}
-                      onChange={verifyOtp}
+                      onChange={(e) => setOtp(e.target.value)}
                       className="mb-2"
+                      maxLength={6}
                     />
+                    <Button className="mb-2" onClick={() => verifyOtp()}>
+                      Verify OTP
+                    </Button>
                   </>
                 ) : (
                   <>
