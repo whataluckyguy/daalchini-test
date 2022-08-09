@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
 import "./Cart.css";
-import { Button } from "reactstrap";
-import { Navigate } from "react-router-dom";
+import { Button, Card } from "reactstrap";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { authentication } from "../config/Firebase";
 import { UserContext } from "../Context/UserContext";
-import Checkout from "./Checkout";
+import { toast } from "react-toastify";
 
-const Continue = ({ continueClass, cartItem, total }) => {
+const Continue = ({ continueClass, setContinueClassName }) => {
   const countryCode = "+91";
   const [mobile, setMobile] = useState(countryCode);
   const [expand, setExpand] = useState(false);
@@ -42,6 +41,8 @@ const Continue = ({ continueClass, cartItem, total }) => {
         .catch((err) => {
           console.log(err);
         });
+      // here
+      toast("OTP Sent!", { type: "info" });
     }
   };
 
@@ -60,12 +61,16 @@ const Continue = ({ continueClass, cartItem, total }) => {
           const user = result.user;
           context.setUser(user);
           // ...
-          console.log(user);
+          toast("Logged In Successfully", {
+            type: "success",
+            theme: "colored",
+          });
         })
         .catch((error) => {
           // User couldn't sign in (bad verification code?)
           // ...
           console.log(error);
+          toast(error, { type: "warning", theme: "colored" });
         });
     }
   };
@@ -77,34 +82,39 @@ const Continue = ({ continueClass, cartItem, total }) => {
       ) : (
         <>
           <div className={continueClass}>
-            <div className="text-center">
-              <strong>Login</strong>
-            </div>
-            <form className="input" onSubmit={sendOtp}>
-              <input
-                type="tel"
-                placeholder="Enter your mobile number"
-                className="mt-2 mb-1"
-                onChange={(e) => setMobile(e.target.value)}
-                value={mobile}
-              />
-              {expand ? (
-                <>
-                  <input
-                    placeholder="Enter OTP"
-                    value={otp}
-                    onChange={verifyOtp}
-                    className="mb-2"
-                  />
-                </>
-              ) : (
-                <>
-                  <Button color="success" className="mt-2 mb-1" type="submit">
-                    Send Otp
-                  </Button>
-                </>
-              )}
-            </form>
+            <Card fluid>
+              <div className="head login">
+                <h3>Login</h3>
+                <Button onClick={() => setContinueClassName("hide")}>
+                  Close
+                </Button>
+              </div>
+              <form className="input" onSubmit={sendOtp}>
+                <input
+                  type="tel"
+                  placeholder="Enter your mobile number"
+                  className="mt-2 mb-1"
+                  onChange={(e) => setMobile(e.target.value)}
+                  value={mobile}
+                />
+                {expand ? (
+                  <>
+                    <input
+                      placeholder="Enter OTP"
+                      value={otp}
+                      onChange={verifyOtp}
+                      className="mb-2"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Button color="success" className="mt-2 mb-1" type="submit">
+                      Send Otp
+                    </Button>
+                  </>
+                )}
+              </form>
+            </Card>
             <div id="captcha"></div>
           </div>
         </>

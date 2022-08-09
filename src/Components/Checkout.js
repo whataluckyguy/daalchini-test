@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import { toast } from "react-toastify";
 
 const Checkout = ({ setUser, cartItem, total }) => {
   const context = useContext(UserContext);
@@ -61,8 +62,7 @@ const Checkout = ({ setUser, cartItem, total }) => {
           <Button
             color="success"
             onClick={() => {
-              alert("Order Successful");
-              setUser(false);
+              toast("Order Successful", { type: "success", theme: "colored" });
             }}
           >
             Payment

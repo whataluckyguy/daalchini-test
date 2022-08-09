@@ -7,6 +7,7 @@ import BuyPage from "./Components/BuyPage";
 import BottomNav from "./Components/BottomNav";
 import { UserContext } from "./Context/UserContext";
 import Checkout from "./Components/Checkout";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
   const [cartItem, setCartItem] = useState([]);
@@ -40,6 +41,7 @@ const App = () => {
     }
 
     setCartItem([...cartItem, item]);
+    toast("Item added in cart", { type: "success", theme: "colored" });
   };
 
   const handleChange = (item, d) => {
@@ -63,9 +65,8 @@ const App = () => {
 
   return (
     <Router>
-      {/* <div className="App"> */}
-      {/* <BuyPage addInCart={addInCart} handleChange={handleChange} /> */}
       <UserContext.Provider value={{ user, setUser, prev, setPrev }}>
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<MainScreen />} />
           <Route
@@ -73,14 +74,7 @@ const App = () => {
             element={<Checkout cartItem={cartItem} total={total} />}
           />
         </Routes>
-        {/* <BottomNav */}
-        {/* total={total} */}
-        {/* cartItem={cartItem} */}
-        {/* user={user} */}
-        {/* setUser={setUser} */}
-        {/* /> */}
       </UserContext.Provider>
-      {/* </div> */}
     </Router>
   );
 };
