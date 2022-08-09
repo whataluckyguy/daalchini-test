@@ -31,22 +31,24 @@ const Checkout = ({ setUser, cartItem, total }) => {
               <div className="text-center">
                 <h3>Cart Details</h3>
               </div>
-              <Row className="text-center">
+              <Row className="text-center topRow">
                 <Col>Item</Col>
                 <Col>Qty</Col>
                 <Col>Price</Col>
               </Row>
-              {cartItem.map((item) => (
-                <>
-                  <Row>
-                    <Col className="text-center">{item.title}</Col>
-                    <Col className="text-center">{item.amount}</Col>
-                    <Col className="text-center">${item.price}</Col>
-                  </Row>
-                  <hr />
-                </>
-              ))}
-              <Row>
+              <div className="cartItemList">
+                {cartItem.map((item) => (
+                  <>
+                    <Row>
+                      <Col className="text-center">{item.title}</Col>
+                      <Col className="text-center">{item.amount}</Col>
+                      <Col className="text-center">${item.price}</Col>
+                    </Row>
+                    <hr />
+                  </>
+                ))}
+              </div>
+              <Row className="bottomRow">
                 <Col className="text-center">
                   <strong>Total Price</strong>
                 </Col>
